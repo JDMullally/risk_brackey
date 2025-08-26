@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhaue7wuoyjus"]
+
+[ext_resource type="Script" uid="uid://cs1afji6byxu0" path="res://scripts/mini_game.gd" id="1_3kuml"]
+[ext_resource type="Texture2D" uid="uid://xdx5hos4tar" path="res://art/sprites/ring.png" id="1_gn4em"]
+[ext_resource type="Script" uid="uid://c3fkkfkk71q5r" path="res://scripts/circle.gd" id="2_nrtvx"]
+[ext_resource type="Texture2D" uid="uid://cwks44nvp2pc8" path="res://art/sprites/arrow.png" id="4_v2cs6"]
+[ext_resource type="Texture2D" uid="uid://b7j0xe01vi6eb" path="res://art/sprites/target.png" id="5_burph"]
+[ext_resource type="PackedScene" uid="uid://3c6ddxqlu0qs" path="res://scenes/sucess_icon.tscn" id="6_burph"]
+[ext_resource type="Texture2D" uid="uid://bmsva0dtfnx0q" path="res://art/sprites/shield_arrow.png" id="7_hd6k8"]
+
+[node name="MiniGame" type="Node2D"]
+script = ExtResource("1_3kuml")
+
+[node name="Circle" type="Sprite2D" parent="."]
+texture = ExtResource("1_gn4em")
+script = ExtResource("2_nrtvx")
+
+[node name="Target" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Target"]
+texture = ExtResource("5_burph")
+
+[node name="Arrow" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Arrow"]
+texture = ExtResource("4_v2cs6")
+
+[node name="TransitionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackSuccess" parent="." instance=ExtResource("6_burph")]
+position = Vector2(-72, 0)
+texture = ExtResource("4_v2cs6")
+
+[node name="DefendSuccess" parent="." instance=ExtResource("6_burph")]
+position = Vector2(80, 0)
+texture = ExtResource("7_hd6k8")

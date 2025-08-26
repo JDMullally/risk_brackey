@@ -1,0 +1,21 @@
+Idea: Move through a corridor to get the golden cookie. Combat is just a minigame where you need to hit a target with rpg elements attached to the minigame.  
+Player will need to make Gambits to complete encounters which act as risking it for the biscuit.  Combat encounters have an attack and defend phase that happen one after the other.  
+When both are completed, a tally of the mini-games are collected and a pre-telegraphed combat plays out using the scores of both minigames to determine how much damage the player deals and takes.
+At the end of combat, a single health point is restored.  The player has 3 health to start, but will gain 1 more after each boss.
+
+Gambit: Player baseline has 2 attack failures and 3 defend failures. A player can make a gambit at the start of their turn to convert defend failures into attack failures, allowing them to potentially deal more damage while risking more damage taken. Gambits will also reward a boon and bane.
+
+Single Round Gameplay Loop
+ - Monster shows it's damage Intent that turn
+ - Gambit Window appears where the Player can select how many successes/failures
+   - Gambit Window gives a boon and bane (example 2 addition attack attempts but the boss gains Enrage 2)
+ - Player Plays Mini-Game
+ - Mini-Game ends and the values are collected.
+ - Damage is dealt to either enemy and player.
+ - Turn restarts
+
+Multi-Round Gameplay Loop
+ - Monster is defeated
+ - Player gains 1 hitpoint back
+ - Next Monster appears
+ - 2 smaller monsters and 1 larger monster (3x then the game ends with you getting the cookie)

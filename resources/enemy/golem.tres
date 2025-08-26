@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://ch5pwfqylv50w"]
+
+[ext_resource type="Script" uid="uid://5xy0dqnakq1m" path="res://scripts/enemy_stats.gd" id="1_dof5i"]
+[ext_resource type="SpriteFrames" uid="uid://chrlaxjm0uq0" path="res://resources/sprite_frames/GolemSprite.tres" id="1_vb438"]
+
+[resource]
+script = ExtResource("1_dof5i")
+max_health = 10
+max_damage = 4
+min_damage = 2
+enemy_sprite = ExtResource("1_vb438")
+enemy_sprite_flipped = true
+description = "This creature's stone hide seams to resist all but the toughest of blows."
+bonus_ability = 5
+bonus_ability_mod = 6.0
+metadata/_custom_type_script = "uid://5xy0dqnakq1m"

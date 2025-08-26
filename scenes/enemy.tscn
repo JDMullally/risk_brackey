@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bekikn7a81qc2"]
+
+[ext_resource type="SpriteFrames" uid="uid://chrlaxjm0uq0" path="res://resources/sprite_frames/GolemSprite.tres" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://qn7a05jj1a03" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Resource" uid="uid://ch5pwfqylv50w" path="res://resources/enemy/golem.tres" id="2_4ra3w"]
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_md0e3")
+enemy_stats = ExtResource("2_4ra3w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_7p1mj")
+animation = &"hit"
+frame_progress = 0.143053

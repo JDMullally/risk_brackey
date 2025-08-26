@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3 uid="uid://31ix6k1ajpcs"]
+
+[ext_resource type="Script" uid="uid://cl1umg3llyg6s" path="res://scripts/player_stats.gd" id="1_oupy4"]
+
+[resource]
+script = ExtResource("1_oupy4")
+max_hp = 3
+num_actions = 3
+metadata/_custom_type_script = "uid://cl1umg3llyg6s"

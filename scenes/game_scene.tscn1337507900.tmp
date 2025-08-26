@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://efkk52hikge4"]
+
+[ext_resource type="Script" uid="uid://d0e7ol55u2oha" path="res://scripts/game_scene.gd" id="1_onqr8"]
+[ext_resource type="Texture2D" uid="uid://blcno00q2ukgy" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-bg.png" id="2_b5spy"]
+[ext_resource type="PackedScene" uid="uid://ufnu4qtiq77e" path="res://scenes/player_model.tscn" id="2_bw6k5"]
+[ext_resource type="Texture2D" uid="uid://odewqecr1jw3" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-close-trees.png" id="3_utbpp"]
+[ext_resource type="PackedScene" uid="uid://bekikn7a81qc2" path="res://scenes/enemy.tscn" id="3_ycayy"]
+[ext_resource type="Texture2D" uid="uid://rh765j1ax0jm" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-far-trees.png" id="4_mw25s"]
+[ext_resource type="Texture2D" uid="uid://1dguiiyegqk6" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-mid-trees.png" id="5_tcjrq"]
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_onqr8")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_offset = Vector2(-386, -30)
+repeat_size = Vector2(400, 0)
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_b5spy")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_mw25s")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_tcjrq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_utbpp")
+
+[node name="PlayerModel" parent="." instance=ExtResource("2_bw6k5")]
+position = Vector2(235, 217)
+scale = Vector2(2, 2)
+animation = &"crouch_walk"
+frame = 0
+frame_progress = 0.236152
+
+[node name="Enemy" parent="." instance=ExtResource("3_ycayy")]
+position = Vector2(927, 108)
+scale = Vector2(6, 6)

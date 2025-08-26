@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://efkk52hikge4"]
+
+[ext_resource type="Script" uid="uid://d0e7ol55u2oha" path="res://scripts/game_scene.gd" id="1_onqr8"]
+[ext_resource type="Texture2D" uid="uid://blcno00q2ukgy" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-bg.png" id="2_b5spy"]
+[ext_resource type="PackedScene" uid="uid://ufnu4qtiq77e" path="res://scenes/player_model.tscn" id="2_bw6k5"]
+[ext_resource type="PackedScene" uid="uid://dhaue7wuoyjus" path="res://scenes/mini_game.tscn" id="2_ycayy"]
+[ext_resource type="Texture2D" uid="uid://odewqecr1jw3" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-close-trees.png" id="3_utbpp"]
+[ext_resource type="PackedScene" uid="uid://bekikn7a81qc2" path="res://scenes/enemy.tscn" id="3_ycayy"]
+[ext_resource type="Texture2D" uid="uid://rh765j1ax0jm" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-far-trees.png" id="4_mw25s"]
+[ext_resource type="Texture2D" uid="uid://1dguiiyegqk6" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-mid-trees.png" id="5_tcjrq"]
+[ext_resource type="Resource" uid="uid://31ix6k1ajpcs" path="res://resources/player/player_stats.tres" id="7_mw25s"]
+[ext_resource type="PackedScene" uid="uid://b4l6n01dkdb4c" path="res://scenes/player_health.tscn" id="9_utbpp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5spy"]
+bg_color = Color(0.209447, 0.0879268, 0.00846365, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+shadow_color = Color(0.230315, 0.230315, 0.230315, 0.6)
+shadow_size = 3
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_onqr8")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_offset = Vector2(-386, -30)
+repeat_size = Vector2(400, 0)
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_b5spy")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_mw25s")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_tcjrq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_utbpp")
+
+[node name="PlayerModel" parent="." instance=ExtResource("2_bw6k5")]
+unique_name_in_owner = true
+position = Vector2(235, 217)
+scale = Vector2(2, 2)
+animation = &"crouch_walk"
+frame_progress = 0.236152
+stats = ExtResource("7_mw25s")
+
+[node name="Enemy" parent="." instance=ExtResource("3_ycayy")]
+position = Vector2(927, 108)
+scale = Vector2(6, 6)
+
+[node name="Bottom Screen" type="Panel" parent="."]
+custom_minimum_size = Vector2(1152, 0)
+offset_top = 303.0
+offset_right = 1152.0
+offset_bottom = 649.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b5spy")
+
+[node name="MiniGame" parent="Bottom Screen" instance=ExtResource("2_ycayy")]
+position = Vector2(576, 151)
+scale = Vector2(2, 2)
+
+[node name="PlayerHealth" parent="Bottom Screen" node_paths=PackedStringArray("character") instance=ExtResource("9_utbpp")]
+position = Vector2(150, 30)
+character = NodePath("../../PlayerModel")

@@ -9,11 +9,20 @@
 [ext_resource type="Texture2D" uid="uid://rh765j1ax0jm" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-far-trees.png" id="4_mw25s"]
 [ext_resource type="Texture2D" uid="uid://1dguiiyegqk6" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-mid-trees.png" id="5_tcjrq"]
 [ext_resource type="Resource" uid="uid://31ix6k1ajpcs" path="res://resources/player/player_stats.tres" id="7_mw25s"]
-[ext_resource type="StyleBox" uid="uid://3hr424rtvmp8" path="res://resources/style_box.tres" id="9_5ay1a"]
 [ext_resource type="PackedScene" uid="uid://disjdvxsc4y21" path="res://scenes/monster_health.tscn" id="9_tcjrq"]
 [ext_resource type="PackedScene" uid="uid://b4l6n01dkdb4c" path="res://scenes/player_health.tscn" id="9_utbpp"]
 [ext_resource type="Script" uid="uid://tfss0xcekjyv" path="res://scripts/player_healthbar.gd" id="12_rvs2r"]
 [ext_resource type="PackedScene" uid="uid://ucax1fe14hbd" path="res://scenes/monster_damage_intent.tscn" id="13_tqxxy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5spy"]
+bg_color = Color(0.209447, 0.0879268, 0.00846365, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+shadow_color = Color(0.230315, 0.230315, 0.230315, 0.6)
+shadow_size = 3
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_onqr8")
@@ -60,7 +69,7 @@ custom_minimum_size = Vector2(1152, 0)
 offset_top = 303.0
 offset_right = 1152.0
 offset_bottom = 649.0
-theme_override_styles/panel = ExtResource("9_5ay1a")
+theme_override_styles/panel = SubResource("StyleBoxFlat_b5spy")
 
 [node name="MonsterHealth" parent="Bottom Screen" node_paths=PackedStringArray("character") instance=ExtResource("9_tcjrq")]
 position = Vector2(750, 30)
@@ -77,9 +86,3 @@ character = NodePath("../../PlayerModel")
 
 [node name="MonsterDamageIntent" parent="Bottom Screen" instance=ExtResource("13_tqxxy")]
 position = Vector2(794, -208)
-
-[node name="TransitionTimer" type="Timer" parent="."]
-wait_time = 0.4
-one_shot = true
-
-[node name="Camera2D" type="Camera2D" parent="."]

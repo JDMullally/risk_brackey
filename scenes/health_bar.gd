@@ -1,7 +1,7 @@
 extends Node2D
 class_name HealthBar
 const HEARTS = preload("res://art/sprites/hearts/hearts.png")
-
+var last_heart_position : Vector2
 
 func clear_all_hearts():
 	for child in self.get_children():
@@ -39,7 +39,7 @@ func fill_health_bar(current_health : int, max_health : int):
 		new_sprite.position = calculate_heart_position(i)
 		self.add_child(new_sprite)
 		
-	for i in range(max_health - current_health):
+	for i in range(current_health, max_health):
 		var new_sprite = Sprite2D.new()
 		new_sprite.scale = Vector2(2.0, 2.0)
 		new_sprite.texture = empty_heart()

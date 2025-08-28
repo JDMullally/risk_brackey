@@ -2,7 +2,7 @@ extends HealthBar
 @export var character: Enemy
 
 func _ready() -> void:
-	GameRules.update_monster_hp.connect(update_health_bar)
+	GameRules.update_hp.connect(update_health_bar)
 	update_health_bar()
 
 func update_health_bar():

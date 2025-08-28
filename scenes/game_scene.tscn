@@ -47,8 +47,7 @@ texture = ExtResource("3_utbpp")
 unique_name_in_owner = true
 position = Vector2(235, 217)
 scale = Vector2(2, 2)
-animation = &"crouch_walk"
-frame_progress = 0.236152
+animation = &"dead"
 stats = ExtResource("7_mw25s")
 
 [node name="Enemy" parent="." instance=ExtResource("3_ycayy")]
@@ -83,3 +82,4 @@ wait_time = 0.4
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)

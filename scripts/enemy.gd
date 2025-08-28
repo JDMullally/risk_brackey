@@ -8,13 +8,17 @@ var turn_damage : int
 
 
 func _ready():
+	GameRules.check_monster_ready.connect(check_monster_ready)
 	animated_sprite_2d.play(current_animation)
 	setup()
+
+func check_monster_ready():
+	GameRules.monster_ready.emit()
 
 func reset_to_idle():
 	if current_animation == "idle":
 		pass
-	elif animated_sprite_2d.frame == animated_sprite_2d.sprite_frames.get_frame_count(current_animation):
+	elif animated_sprite_2d.frame == animated_sprite_2d.sprite_frames.get_frame_count(current_animation)- 1:
 		current_animation = "idle"
 		animated_sprite_2d.play(current_animation)
 
@@ -60,6 +64,9 @@ func change_animation(new_animation : String):
 
 func _process(delta: float) -> void:
 	reset_to_idle()
+
+func enemy_dead():
+	return enemy_stats.is_dead()
 
 func take_damage(damage : int):
 	var total_damage_taken : int

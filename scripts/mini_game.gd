@@ -17,11 +17,11 @@ enum Mode {Attack, Block, End}
 
 # macro game specific vars
 var mode : Mode = Mode.Attack
-var blocks : int = 3
-var attacks : int = 2
+var blocks : int = 1
+var attacks : int = 1
 var successful_blocks : int = 0
 var successful_attacks : int = 0
-var stopped : bool = true
+var stopped : bool = false
 
 # mini game specific vars
 var arrow_angle: float = 0.0
@@ -30,8 +30,10 @@ var target_range: float = 25.0
 var direction: float = 1
 
 func stop():
-	stopped = true
-	hide()
+	if !stopped:
+		stopped = true
+		hide()
+		GameRules.mini_game_finished.emit(successful_attacks, successful_blocks)
 
 func start(blocks, attacks):
 	self.blocks = blocks

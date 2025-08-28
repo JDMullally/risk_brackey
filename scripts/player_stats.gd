@@ -6,6 +6,9 @@ class_name PlayerStats
 var current_health : int = max_hp
 var current_blocks : int = 0
 
+func set_health_max():
+	current_health = max_hp
+
 func add_blocks(blocks):
 	current_blocks = blocks
 	

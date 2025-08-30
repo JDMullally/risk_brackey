@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://bg65l1k5yoqjs"]
+
+[ext_resource type="Script" uid="uid://bjfswv8npxuj6" path="res://scripts/fortune_wheel.gd" id="1_e0mqf"]
+[ext_resource type="Texture2D" uid="uid://ddf4tegacel6i" path="res://art/sprites/wheel.png" id="2_4bqi3"]
+[ext_resource type="Texture2D" uid="uid://ci7q71s20nimb" path="res://art/sprites/Shikashi's Fantasy Icons Pack v2/#1 - Transparent Icons.png" id="3_ql1ej"]
+[ext_resource type="Texture2D" uid="uid://bgrth2m6rdo7a" path="res://art/sprites/select_arrow.png" id="4_dwwif"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mk4l"]
+atlas = ExtResource("3_ql1ej")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_026ud"]
+atlas = ExtResource("3_ql1ej")
+region = Rect2(320, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3e1o"]
+atlas = ExtResource("3_ql1ej")
+region = Rect2(225, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql1ej"]
+atlas = ExtResource("3_ql1ej")
+region = Rect2(32, 352, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwwif"]
+atlas = ExtResource("3_ql1ej")
+region = Rect2(195.613, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ktxr"]
+atlas = ExtResource("3_ql1ej")
+region = Rect2(448, 96, 32, 32)
+
+[node name="FortuneWheel" type="Node2D"]
+position = Vector2(406, 178)
+scale = Vector2(3, 3)
+script = ExtResource("1_e0mqf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.806342
+texture = ExtResource("2_4bqi3")
+
+[node name="Strength" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(9, 34)
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_2mk4l")
+
+[node name="Blight" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-28, 23)
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_026ud")
+
+[node name="Defense" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-37, -12)
+rotation = 2.0944
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_k3e1o")
+
+[node name="Reflect" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-7, -37)
+rotation = 2.96706
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_ql1ej")
+
+[node name="Health" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(25.6685, -23.8773)
+rotation = 3.93223
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_dwwif")
+
+[node name="Rewrite" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(32.6975, 7.80222)
+rotation = 5.044
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_8ktxr")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-1.06581e-14, -3)
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_dwwif")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -19.6667
+offset_top = -19.3333
+offset_right = 80.3333
+offset_bottom = 80.6667
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

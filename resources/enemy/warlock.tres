@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://xrcd8m1q5e8m"]
+
+[ext_resource type="SpriteFrames" uid="uid://ioudqjwcfth8" path="res://resources/sprite_frames/warlock.tres" id="1_i2tt0"]
+[ext_resource type="Script" uid="uid://5xy0dqnakq1m" path="res://scripts/enemy_stats.gd" id="1_tdmd7"]
+
+[resource]
+script = ExtResource("1_tdmd7")
+max_health = 15
+size_multiplier = 4.0
+floating_margin = 40
+max_damage = 15
+min_damage = 12
+enemy_sprite = ExtResource("1_i2tt0")
+enemy_sprite_flipped = false
+description = "A powerful shield protects this creature.  It must be destroyed in one attack.
+"
+bonus_ability = 5
+bonus_ability_mod = 14.0
+metadata/_custom_type_script = "uid://5xy0dqnakq1m"

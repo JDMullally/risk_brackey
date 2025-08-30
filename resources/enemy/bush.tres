@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://d1a7ycgqcacjw"]
+
+[ext_resource type="Script" uid="uid://5xy0dqnakq1m" path="res://scripts/enemy_stats.gd" id="1_djx3k"]
+[ext_resource type="SpriteFrames" uid="uid://bsbckg186bvn" path="res://resources/sprite_frames/bush_monster.tres" id="1_pnulu"]
+
+[resource]
+script = ExtResource("1_djx3k")
+max_health = 10
+size_multiplier = 4.0
+floating_margin = 40
+max_damage = 1
+min_damage = 6
+enemy_sprite = ExtResource("1_pnulu")
+enemy_sprite_flipped = false
+description = ""
+bonus_ability = 1
+bonus_ability_mod = 2.0
+metadata/_custom_type_script = "uid://5xy0dqnakq1m"

@@ -8,6 +8,8 @@ class_name MiniGame
 
 @onready var attack_success: Node2D = $AttackSuccess
 @onready var defend_success: Node2D = $DefendSuccess
+@onready var arrow_sprite: Sprite2D = $Arrow/ArrowSprite
+@onready var target_sprite: Sprite2D = $Target/TargetSprite
 
 @onready var transition_timer: Timer = $TransitionTimer
 @onready var arrow: Node2D = %Arrow
@@ -16,7 +18,7 @@ class_name MiniGame
 enum Mode {Attack, Block, End}
 
 # macro game specific vars
-var mode : Mode = Mode.Attack
+var mode : Mode
 var blocks : int = 1
 var attacks : int = 1
 var successful_blocks : int = 0
@@ -44,15 +46,35 @@ func start(blocks, attacks):
 	show()
 	stopped = false
 
+func set_attack_textures():
+	arrow_sprite.texture.set_region(Rect2(Vector2(32, 160), Vector2(32, 32)))
+	target_sprite.texture.set_region(Rect2(Vector2(0, 0), Vector2(32, 32)))
+
+func set_defend_textures():
+	arrow_sprite.texture.set_region(Rect2(Vector2(0, 192), Vector2(32, 32)))
+	target_sprite.texture.set_region(Rect2(Vector2(32, 224), Vector2(32, 32)))
+
 func transition_mode(given_mode : Mode):
 	match given_mode:
 		Mode.Attack:
-			mode = given_mode
+			if attacks > 0:
+				mode = Mode.Attack
+				set_attack_textures()
+				transition_timer.start()
+			else:
+				mode = Mode.Block
+				set_defend_textures()
+				transition_timer.start()
 		Mode.Block:
-			transition_timer.start()
-			mode = given_mode
+			if blocks > 0:
+				mode = Mode.Block
+				set_defend_textures()
+				transition_timer.start()
+			else:
+				mode = Mode.End
+				transition_timer.start()
 		Mode.End:
-			mode = given_mode
+			mode = Mode.End
 			transition_timer.start()
 
 func move_target_random():
@@ -64,6 +86,7 @@ func move_target(angle : float):
 
 func _ready() -> void:
 	GameRules.start_minigame.connect(start)
+	GameRules.send_dodge_value.connect(set_game_difficulty)
 	stop()
 
 func play_mini_game(delta: float):
@@ -118,3 +141,6 @@ func _check_hit() -> void:
 		arrow_speed = 180.0
 	move_target_random()
 	direction = direction * -1
+
+func set_game_difficulty(dodge_value : float):
+	enemy_dodge = dodge_value

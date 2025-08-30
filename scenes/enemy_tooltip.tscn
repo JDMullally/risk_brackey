@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3wr2ivets0ye"]
+
+[ext_resource type="Script" uid="uid://dd7jf440kkjt5" path="res://scripts/enemy_tooltip.gd" id="1_g1cme"]
+[ext_resource type="StyleBox" uid="uid://3hr424rtvmp8" path="res://resources/style_box.tres" id="1_u2j7i"]
+
+[node name="EnemyTooltip" type="Panel"]
+offset_right = 543.0
+offset_bottom = 196.0
+theme_override_styles/panel = ExtResource("1_u2j7i")
+script = ExtResource("1_g1cme")
+max_width = 200
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2

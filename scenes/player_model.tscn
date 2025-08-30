@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ufnu4qtiq77e"]
-
-[ext_resource type="SpriteFrames" uid="uid://dxpbiibete17e" path="res://resources/sprite_frames/player.tres" id="1_fr7j6"]
-[ext_resource type="Script" uid="uid://buetuawdta87e" path="res://scenes/player_model.gd" id="2_cggpe"]
-
-[node name="PlayerModel" type="AnimatedSprite2D"]
-sprite_frames = ExtResource("1_fr7j6")
-animation = &"idle"
-script = ExtResource("2_cggpe")

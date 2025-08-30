@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://btohrynyavcg0"]
+
+[ext_resource type="SpriteFrames" uid="uid://cc4rv60pcnk8s" path="res://resources/sprite_frames/bat.tres" id="1_006p6"]
+[ext_resource type="Script" uid="uid://5xy0dqnakq1m" path="res://scripts/enemy_stats.gd" id="1_h6i56"]
+
+[resource]
+script = ExtResource("1_h6i56")
+max_health = 14
+size_multiplier = 3.0
+floating_margin = 100
+max_damage = 2
+min_damage = 3
+enemy_sprite = ExtResource("1_006p6")
+enemy_sprite_flipped = false
+description = ""
+bonus_ability = 2
+bonus_ability_mod = 2.5
+metadata/_custom_type_script = "uid://5xy0dqnakq1m"

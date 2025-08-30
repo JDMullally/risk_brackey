@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b4ic5m8pfyvby"]
+
+[node name="ActionPoint" type="Sprite2D"]
+
+[node name="ActionID" type="Sprite2D" parent="."]

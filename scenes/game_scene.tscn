@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://efkk52hikge4"]
+[gd_scene load_steps=19 format=3 uid="uid://efkk52hikge4"]
 
 [ext_resource type="Script" uid="uid://d0e7ol55u2oha" path="res://scripts/game_scene.gd" id="1_onqr8"]
 [ext_resource type="Texture2D" uid="uid://blcno00q2ukgy" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-bg.png" id="2_b5spy"]
-[ext_resource type="PackedScene" uid="uid://ufnu4qtiq77e" path="res://scenes/player_model.tscn" id="2_bw6k5"]
+[ext_resource type="PackedScene" uid="uid://ufnu4qtiq77e" path="res://scenes/player.tscn" id="2_bw6k5"]
 [ext_resource type="PackedScene" uid="uid://dhaue7wuoyjus" path="res://scenes/mini_game.tscn" id="2_ycayy"]
 [ext_resource type="Texture2D" uid="uid://odewqecr1jw3" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-close-trees.png" id="3_utbpp"]
 [ext_resource type="PackedScene" uid="uid://bekikn7a81qc2" path="res://scenes/enemy.tscn" id="3_ycayy"]
@@ -10,10 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://1dguiiyegqk6" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-mid-trees.png" id="5_tcjrq"]
 [ext_resource type="Resource" uid="uid://31ix6k1ajpcs" path="res://resources/player/player_stats.tres" id="7_mw25s"]
 [ext_resource type="StyleBox" uid="uid://3hr424rtvmp8" path="res://resources/style_box.tres" id="9_5ay1a"]
+[ext_resource type="Resource" uid="uid://coyqlhwoowhba" path="res://resources/enemy/slime.tres" id="9_s76x2"]
 [ext_resource type="PackedScene" uid="uid://disjdvxsc4y21" path="res://scenes/monster_health.tscn" id="9_tcjrq"]
 [ext_resource type="PackedScene" uid="uid://b4l6n01dkdb4c" path="res://scenes/player_health.tscn" id="9_utbpp"]
 [ext_resource type="Script" uid="uid://tfss0xcekjyv" path="res://scripts/player_healthbar.gd" id="12_rvs2r"]
 [ext_resource type="PackedScene" uid="uid://ucax1fe14hbd" path="res://scenes/monster_damage_intent.tscn" id="13_tqxxy"]
+[ext_resource type="PackedScene" uid="uid://b3wr2ivets0ye" path="res://scenes/enemy_tooltip.tscn" id="16_mwyo0"]
+[ext_resource type="PackedScene" uid="uid://dsdl2xyfsgmqk" path="res://scenes/gambit.tscn" id="17_mwyo0"]
+[ext_resource type="PackedScene" uid="uid://bisfs376008fm" path="res://scenes/info_panel.tscn" id="18_s76x2"]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_onqr8")
@@ -43,7 +47,7 @@ position = Vector2(776, 131)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_utbpp")
 
-[node name="PlayerModel" parent="." instance=ExtResource("2_bw6k5")]
+[node name="Player" parent="." instance=ExtResource("2_bw6k5")]
 unique_name_in_owner = true
 position = Vector2(235, 217)
 scale = Vector2(2, 2)
@@ -51,8 +55,8 @@ animation = &"dead"
 stats = ExtResource("7_mw25s")
 
 [node name="Enemy" parent="." instance=ExtResource("3_ycayy")]
-position = Vector2(927, 108)
-scale = Vector2(6, 6)
+position = Vector2(1007, 270)
+enemy_stats = ExtResource("9_s76x2")
 
 [node name="Bottom Screen" type="Panel" parent="."]
 custom_minimum_size = Vector2(1152, 0)
@@ -62,7 +66,7 @@ offset_bottom = 649.0
 theme_override_styles/panel = ExtResource("9_5ay1a")
 
 [node name="MonsterHealth" parent="Bottom Screen" node_paths=PackedStringArray("character") instance=ExtResource("9_tcjrq")]
-position = Vector2(750, 30)
+position = Vector2(900, 30)
 character = NodePath("../../Enemy")
 
 [node name="MiniGame" parent="Bottom Screen" instance=ExtResource("2_ycayy")]
@@ -70,12 +74,37 @@ position = Vector2(576, 151)
 scale = Vector2(2, 2)
 
 [node name="PlayerHealth" parent="Bottom Screen" node_paths=PackedStringArray("character") instance=ExtResource("9_utbpp")]
-position = Vector2(150, 30)
+position = Vector2(32, 30)
 script = ExtResource("12_rvs2r")
-character = NodePath("../../PlayerModel")
+character = NodePath("../../Player")
 
 [node name="MonsterDamageIntent" parent="Bottom Screen" instance=ExtResource("13_tqxxy")]
 position = Vector2(794, -208)
+
+[node name="InfoPanel" parent="Bottom Screen" node_paths=PackedStringArray("enemy", "tooltip") instance=ExtResource("18_s76x2")]
+layout_mode = 0
+offset_left = 748.0
+offset_top = 7.0
+offset_right = 788.0
+offset_bottom = 47.0
+enemy = NodePath("../../Enemy")
+tooltip = NodePath("../EnemyTooltip")
+
+[node name="EnemyTooltip" parent="Bottom Screen" instance=ExtResource("16_mwyo0")]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 41.0
+offset_right = 1017.0
+offset_bottom = 107.0
+
+[node name="Gambit" parent="Bottom Screen" instance=ExtResource("17_mwyo0")]
+visible = false
+layout_mode = 0
+offset_left = 271.0
+offset_top = -245.0
+offset_right = 571.0
+offset_bottom = -5.0
+scale = Vector2(2, 2)
 
 [node name="TransitionTimer" type="Timer" parent="."]
 wait_time = 0.4

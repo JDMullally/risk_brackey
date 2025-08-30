@@ -1,9 +1,140 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsdl2xyfsgmqk"]
+[gd_scene load_steps=8 format=3 uid="uid://dsdl2xyfsgmqk"]
 
 [ext_resource type="StyleBox" uid="uid://3hr424rtvmp8" path="res://resources/style_box.tres" id="1_nqjgs"]
+[ext_resource type="Texture2D" uid="uid://bgrth2m6rdo7a" path="res://art/sprites/select_arrow.png" id="2_51i0f"]
+[ext_resource type="Script" uid="uid://fq22sl0oi0f2" path="res://scripts/gambit.gd" id="2_yhf7j"]
+[ext_resource type="Texture2D" uid="uid://ci7q71s20nimb" path="res://art/sprites/Shikashi's Fantasy Icons Pack v2/#1 - Transparent Icons.png" id="3_fwaob"]
+[ext_resource type="Texture2D" uid="uid://eecaolpoktll" path="res://art/sprites/Undo.png" id="5_bic15"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhf7j"]
+atlas = ExtResource("3_fwaob")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwaob"]
+atlas = ExtResource("3_fwaob")
+region = Rect2(32, 160, 32, 32)
 
 [node name="Gambit" type="Panel"]
 custom_minimum_size = Vector2(300, 240)
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = ExtResource("1_nqjgs")
+script = ExtResource("2_yhf7j")
+
+[node name="GambitTitle" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 301.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "[center][font_size=32][wave]Select Actions[/wave][/font_size][/center]"
+scroll_active = false
+
+[node name="ShieldIcon" type="Sprite2D" parent="."]
+position = Vector2(268, 75)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_yhf7j")
+
+[node name="SwordIcon" type="Sprite2D" parent="."]
+position = Vector2(32, 75)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_fwaob")
+
+[node name="DamageLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 85.0
+offset_right = 48.0
+offset_bottom = 125.0
+bbcode_enabled = true
+text = "[center][font_size=30]0[/font_size][/center]"
+scroll_active = false
+
+[node name="BlockLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 85.0
+offset_right = 289.0
+offset_bottom = 125.0
+bbcode_enabled = true
+text = "[center][font_size=30]0[/font_size][/center]"
+scroll_active = false
+
+[node name="PointLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 55.0
+offset_right = 170.0
+offset_bottom = 95.0
+bbcode_enabled = true
+text = "[center][font_size=30]3[/font_size][/center]"
+scroll_active = false
+
+[node name="RightArrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 60.0
+offset_right = 200.0
+offset_bottom = 92.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("2_51i0f")
+flip_h = true
+
+[node name="LeftArrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 60.0
+offset_right = 132.0
+offset_bottom = 92.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("2_51i0f")
+
+[node name="Undo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 110.0
+offset_right = 166.0
+offset_bottom = 142.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("5_bic15")
+flip_h = true
+
+[node name="ContinueArrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 180.0
+offset_right = 268.0
+offset_bottom = 212.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("2_51i0f")
+flip_h = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ContinueArrow"]
+layout_mode = 0
+offset_left = -22.0
+offset_top = 31.0
+offset_right = 48.0
+offset_bottom = 61.0
+bbcode_enabled = true
+text = "[center][font_size=12]Continue[/font_size][/center]"
+scroll_active = false
+
+[node name="GambitArrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 180.0
+offset_right = 64.0
+offset_bottom = 212.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("2_51i0f")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GambitArrow"]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 29.0
+offset_right = 51.0
+offset_bottom = 61.0
+bbcode_enabled = true
+text = "[center][font_size=15
+][wave]Gambit[/wave][/font_size][/center]"
+scroll_active = false

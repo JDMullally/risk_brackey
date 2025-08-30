@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://ch5pwfqylv50w"]
+
+[ext_resource type="SpriteFrames" uid="uid://dgl25mej7lykb" path="res://resources/sprite_frames/lesser_golem.tres" id="1_uecit"]
+[ext_resource type="Script" uid="uid://5xy0dqnakq1m" path="res://scripts/enemy_stats.gd" id="2_nqwu2"]
+
+[resource]
+script = ExtResource("2_nqwu2")
+max_health = 20
+size_multiplier = 3.0
+floating_margin = 80
+max_damage = 2
+min_damage = 1
+enemy_sprite = ExtResource("1_uecit")
+enemy_sprite_flipped = true
+description = "This creature has devestating stone claws."
+bonus_ability = 3
+bonus_ability_mod = 4.0
+metadata/_custom_type_script = "uid://5xy0dqnakq1m"

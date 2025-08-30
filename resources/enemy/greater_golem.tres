@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://do4yisc71xfix"]
+
+[ext_resource type="Script" uid="uid://5xy0dqnakq1m" path="res://scripts/enemy_stats.gd" id="1_p1h8n"]
+[ext_resource type="SpriteFrames" uid="uid://chrlaxjm0uq0" path="res://resources/sprite_frames/GolemSprite.tres" id="1_uhwrg"]
+
+[resource]
+script = ExtResource("1_p1h8n")
+max_health = 30
+size_multiplier = 7.0
+floating_margin = 40
+max_damage = 8
+min_damage = 1
+enemy_sprite = ExtResource("1_uhwrg")
+enemy_sprite_flipped = true
+description = "This golem has been alive for hundreds of years. It's hide is incredibly tough."
+bonus_ability = 1
+bonus_ability_mod = 4.0
+metadata/_custom_type_script = "uid://5xy0dqnakq1m"

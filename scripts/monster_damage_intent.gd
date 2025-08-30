@@ -8,7 +8,7 @@ func _ready() -> void:
 func recieve_monster_damage_intent(damage : int):
 	self.show()
 	rich_text_label.bbcode_enabled = true
-	rich_text_label.append_text("[center][color=Red]" + str(damage) + "[/color][/center]")
+	rich_text_label.append_text("[center][font_size=32][color=CRIMSON]" + str(damage) + "[/color][/font_size][/center]")
 
 func hide_monster_damage_intent():
 	rich_text_label.clear()

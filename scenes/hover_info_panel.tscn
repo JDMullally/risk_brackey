@@ -1,0 +1,173 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwoiwcu6o1c71"]
+
+[ext_resource type="Texture2D" uid="uid://ci7q71s20nimb" path="res://art/sprites/Shikashi's Fantasy Icons Pack v2/#1 - Transparent Icons.png" id="3_tmrw8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvsay"]
+bg_color = Color(0.209447, 0.0879268, 0.00846365, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+shadow_color = Color(0.230315, 0.230315, 0.230315, 0.6)
+shadow_size = 3
+
+[sub_resource type="GDScript" id="GDScript_4ggbo"]
+script/source = "extends Panel
+
+const ENDURE = Rect2(Vector2(256, 96), Vector2(32, 32))
+const BLOCK = Rect2(Vector2(224, 96), Vector2(32, 32))
+const NONE = Rect2(Vector2(64, 0), Vector2(32, 32))
+const CRUSH = Rect2(Vector2(352, 96), Vector2(32, 32))
+const ENRAGE = Rect2(Vector2(128, 0), Vector2(32, 32))
+const DODGE = Rect2(Vector2(384, 96), Vector2(32, 32))
+const REGENERATE = Rect2(Vector2(384, 96), Vector2(32, 32))
+
+enum AbilityNumber {One, Two}
+@onready var sprite_2d: Sprite2D = %Sprite2D
+
+@export var enemy: Enemy
+@export var tooltip: EnemyTooltip
+@export var use_mouse_follow_tooltip := true
+@export var normal_bg: Color = Color(0.12, 0.12, 0.16, 1.0)
+@export var hover_bg: Color = Color(0.20, 0.20, 0.28, 1.0)
+@export var tween_time := 0.08
+@export var ability_number: AbilityNumber
+var bonus_ability : EnemyStats.BonusAbilityType
+var bonus_ability_value : int
+
+var _tween: Tween
+
+func change_image():
+	self.show()
+	match bonus_ability:
+		EnemyStats.BonusAbilityType.None:
+			sprite_2d.texture.set_region(NONE)
+			self.hide()
+		EnemyStats.BonusAbilityType.Block:
+			sprite_2d.texture.set_region(BLOCK)
+		EnemyStats.BonusAbilityType.Dodge:
+			sprite_2d.texture.set_region(DODGE)
+		EnemyStats.BonusAbilityType.Crush:
+			sprite_2d.texture.set_region(CRUSH)
+		EnemyStats.BonusAbilityType.Enrage:
+			sprite_2d.texture.set_region(ENRAGE)
+		EnemyStats.BonusAbilityType.Endure:
+			sprite_2d.texture.set_region(ENDURE)
+		EnemyStats.BonusAbilityType.Regenerate:
+			sprite_2d.texture.set_region(REGENERATE)
+		_:
+			self.hide()
+		
+
+func refresh():
+	match ability_number:
+		AbilityNumber.One:
+			bonus_ability = enemy.enemy_stats.bonus_ability
+			bonus_ability_value = enemy.enemy_stats.bonus_ability_mod
+		AbilityNumber.Two:
+			bonus_ability = enemy.enemy_stats.bonus_ability_2
+			bonus_ability_value = enemy.enemy_stats.bonus_ability_mod
+	change_image()
+
+func _ready() -> void:
+	# StyleBox so we can change bg color nicely
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = normal_bg
+	sb.corner_radius_top_left = 12
+	sb.corner_radius_top_right = 12
+	sb.corner_radius_bottom_left = 12
+	sb.corner_radius_bottom_right = 12
+	add_theme_stylebox_override(\"panel\", sb)
+
+	mouse_entered.connect(_on_mouse_enter)
+	mouse_exited.connect(_on_mouse_exit)
+	gui_input.connect(_on_gui_input)
+	GameRules.switch_monster.connect(handle_switch_monsters)
+	refresh()
+
+func handle_switch_monsters(round : int):
+	print(\"hello!\")
+	refresh()
+
+func _on_mouse_enter() -> void:
+	_highlight(true)
+	_show_tooltip()
+
+func _on_mouse_exit() -> void:
+	_highlight(false)
+	if tooltip:
+		tooltip.hide_tooltip()
+
+func _on_gui_input(event: InputEvent) -> void:
+	# Optional: keep tooltip following mouse while still inside the panel
+	if tooltip and tooltip.visible and event is InputEventMouseMotion and use_mouse_follow_tooltip:
+		tooltip.show_at_mouse()
+
+func _highlight(hovering: bool) -> void:
+	var sb := get_theme_stylebox(\"panel\") as StyleBoxFlat
+	if not sb:
+		return
+	if _tween and _tween.is_running():
+		_tween.kill()
+
+	_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	var from_col := sb.bg_color
+	var to_col := hover_bg if hovering else normal_bg
+	_tween.tween_property(sb, \"bg_color\", to_col, tween_time)
+
+func _show_tooltip() -> void:
+	if not tooltip or not enemy:
+		return
+	
+	enemy.enemy_stats.description
+	
+	var text = \"\"
+	var ability_mod = str(int(enemy.enemy_stats.bonus_ability_mod))
+
+	match enemy.enemy_stats.bonus_ability:
+		EnemyStats.BonusAbilityType.None:
+			text = text + \"[color=LIGHT_GRAY]This creature has no defining abilities.[/color]\"
+		EnemyStats.BonusAbilityType.Block:
+			text = text + \"[color=SLATE_GRAY]Block \" + ability_mod + \"[/color]: \"
+			text = text + \"\\nThis creature is able to block up to \" + str(int(enemy.enemy_stats.bonus_ability_mod)) + \" additional damage.\"
+		EnemyStats.BonusAbilityType.Dodge:
+			text = text + \"[color=LIGHT_GREEN]\" + ability_mod + \"[/color]: \"
+			text = text + \"\\nThis creature causes subsequent target hits to be much harder.\"
+		EnemyStats.BonusAbilityType.Crush:
+			text = text + \"[color=DARK_SLATE_GRAY]Crush \" + ability_mod + \"[/color]: \"
+			text = text + \"\\nThis creature pierces up to \" + ability_mod + \" block value when it attacks.\"
+		EnemyStats.BonusAbilityType.Enrage:
+			text = text + \"  [color=RED]Enrage \" + ability_mod + \"[/color]: \"
+			text = text + \"\\nEvery 2 damage this creature takes, it gains \" + ability_mod + \" permanent damage.\"
+		EnemyStats.BonusAbilityType.Endure:
+			text = text + \"[color=TEAL]Endure \" + ability_mod + \"[/color]: \"
+			text = text + \"\\nThis creature ignores any damage value less than or equal to \" + ability_mod + \".\"
+		EnemyStats.BonusAbilityType.Regenerate:
+			text = text + \"[color=WEB_GREEN]Regenerate \" + ability_mod + \"[/color]: \"
+			text = text + \"\\nIf this creature is still alive at the end of a round, it will regenerate \" + ability_mod + \" health.\"
+		_:
+			pass
+	tooltip.set_text(text)
+
+	if use_mouse_follow_tooltip:
+		tooltip.show_at_mouse()
+	else:
+		tooltip.show_at_panel(self)
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmrw8"]
+atlas = ExtResource("3_tmrw8")
+region = Rect2(384, 96, 32.051, 32.051)
+
+[node name="HoverInfoPanel" type="Panel"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wvsay")
+script = SubResource("GDScript_4ggbo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(20, 20)
+texture = SubResource("AtlasTexture_tmrw8")

@@ -1,10 +1,12 @@
 extends Resource
 class_name EnemyStats
 
-enum BonusAbilityType {None, Block, Dodge, Crush, Enrage, Endure}
+enum BonusAbilityType {None, Block, Dodge, Crush, Enrage, Endure, Regenerate}
 
 @export var max_health : int
 var _health : int
+@export var size_multiplier : float
+@export var floating_margin : int
 @export var max_damage : int
 @export var min_damage : int
 @export var enemy_sprite : SpriteFrames
@@ -19,6 +21,9 @@ func increment_temp_ability_mod(increase : float):
 
 func base_calculated_damage():
 	return randi_range(min_damage, max_damage)
+
+func heal(heal_amount : int):
+	_health = clamp(_health + heal_amount, 0, max_health)
 
 func get_current_health():
 	return _health

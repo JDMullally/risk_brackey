@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://coyqlhwoowhba"]
+
+[ext_resource type="Script" uid="uid://5xy0dqnakq1m" path="res://scripts/enemy_stats.gd" id="1_1rhro"]
+[ext_resource type="SpriteFrames" uid="uid://dbtsj4skkn55l" path="res://resources/sprite_frames/slime.tres" id="1_pfre4"]
+
+[resource]
+script = ExtResource("1_1rhro")
+max_health = 6
+size_multiplier = 3.0
+floating_margin = 40
+max_damage = 1
+min_damage = 1
+enemy_sprite = ExtResource("1_pfre4")
+enemy_sprite_flipped = false
+description = "Basic Slime."
+bonus_ability = 0
+bonus_ability_mod = 0.0
+metadata/_custom_type_script = "uid://5xy0dqnakq1m"

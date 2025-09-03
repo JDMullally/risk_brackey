@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtk6wosob8b5"]
+
+[ext_resource type="Script" uid="uid://wpgh2tigaat1" path="res://scripts/menu.gd" id="1_yqeox"]
+[ext_resource type="AudioStream" uid="uid://bml8wfkf3t0s0" path="res://art/sfx/light-woosh-7119 (mp3cut.net).mp3" id="2_vjb58"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+script = ExtResource("1_yqeox")
+
+[node name="MouseOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vjb58")
+pitch_scale = 0.85

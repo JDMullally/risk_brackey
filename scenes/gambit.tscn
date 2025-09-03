@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsdl2xyfsgmqk"]
+[gd_scene load_steps=9 format=3 uid="uid://dsdl2xyfsgmqk"]
 
 [ext_resource type="StyleBox" uid="uid://3hr424rtvmp8" path="res://resources/style_box.tres" id="1_nqjgs"]
 [ext_resource type="Texture2D" uid="uid://bgrth2m6rdo7a" path="res://art/sprites/select_arrow.png" id="2_51i0f"]
 [ext_resource type="Script" uid="uid://fq22sl0oi0f2" path="res://scripts/gambit.gd" id="2_yhf7j"]
 [ext_resource type="Texture2D" uid="uid://ci7q71s20nimb" path="res://art/sprites/Shikashi's Fantasy Icons Pack v2/#1 - Transparent Icons.png" id="3_fwaob"]
 [ext_resource type="Texture2D" uid="uid://eecaolpoktll" path="res://art/sprites/Undo.png" id="5_bic15"]
+[ext_resource type="AudioStream" uid="uid://b3d6hnkm6w57h" path="res://art/sfx/anvil-hit-2-14845.mp3" id="6_i6oe1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yhf7j"]
 atlas = ExtResource("3_fwaob")
@@ -28,6 +29,17 @@ offset_right = 301.0
 offset_bottom = 40.0
 bbcode_enabled = true
 text = "[center][font_size=32][wave]Select Actions[/wave][/font_size][/center]"
+scroll_active = false
+
+[node name="GambitInfo" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(280, 30)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 143.0
+offset_right = 290.0
+offset_bottom = 183.0
+bbcode_enabled = true
+text = "[font_size=24][wave]Gambit info[/wave][/font_size]"
 scroll_active = false
 
 [node name="ShieldIcon" type="Sprite2D" parent="."]
@@ -101,9 +113,9 @@ flip_h = true
 
 [node name="ContinueArrow" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 236.0
+offset_left = 136.0
 offset_top = 180.0
-offset_right = 268.0
+offset_right = 168.0
 offset_bottom = 212.0
 pivot_offset = Vector2(16, 16)
 texture = ExtResource("2_51i0f")
@@ -111,30 +123,15 @@ flip_h = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ContinueArrow"]
 layout_mode = 0
-offset_left = -22.0
-offset_top = 31.0
-offset_right = 48.0
-offset_bottom = 61.0
-bbcode_enabled = true
-text = "[center][font_size=12]Continue[/font_size][/center]"
-scroll_active = false
-
-[node name="GambitArrow" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 180.0
-offset_right = 64.0
-offset_bottom = 212.0
-pivot_offset = Vector2(16, 16)
-texture = ExtResource("2_51i0f")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GambitArrow"]
-layout_mode = 0
-offset_left = -19.0
+offset_left = -21.0
 offset_top = 29.0
-offset_right = 51.0
-offset_bottom = 61.0
+offset_right = 49.0
+offset_bottom = 59.0
 bbcode_enabled = true
-text = "[center][font_size=15
-][wave]Gambit[/wave][/font_size][/center]"
+text = "[center][font_size=24][wave]Continue[/wave][/font_size][/center]"
 scroll_active = false
+
+[node name="ClickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_i6oe1")
+pitch_scale = 1.2
+bus = &"SFX"

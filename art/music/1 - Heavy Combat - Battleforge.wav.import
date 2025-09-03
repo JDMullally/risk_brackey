@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dlnmlk3ven1nw"
+path="res://.godot/imported/1 - Heavy Combat - Battleforge.wav-c580fe6d9de6d9b7555a447375325def.sample"
+
+[deps]
+
+source_file="res://art/music/1 - Heavy Combat - Battleforge.wav"
+dest_files=["res://.godot/imported/1 - Heavy Combat - Battleforge.wav-c580fe6d9de6d9b7555a447375325def.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

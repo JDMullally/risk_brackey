@@ -6,6 +6,9 @@ class_name MiniGame
 @export var enemy_dodge: float = 1.5
 @export var target_image : Texture
 
+@onready var success: AudioStreamPlayer = $Success
+@onready var miss: AudioStreamPlayer = $Miss
+
 @onready var attack_success: Node2D = $AttackSuccess
 @onready var defend_success: Node2D = $DefendSuccess
 @onready var arrow_sprite: Sprite2D = $Arrow/ArrowSprite
@@ -17,7 +20,6 @@ class_name MiniGame
 
 enum Mode {Attack, Block, End}
 
-# macro game specific vars
 var mode : Mode
 var blocks : int = 1
 var attacks : int = 1
@@ -25,11 +27,23 @@ var successful_blocks : int = 0
 var successful_attacks : int = 0
 var stopped : bool = false
 
-# mini game specific vars
 var arrow_angle: float = 0.0
 var target_angle: float = 180.0
 var target_range: float = 25.0
 var direction: float = 1
+
+func _ready() -> void:
+	success.volume_db = success.volume_db + 10
+	miss.volume_db = miss.volume_db + 10
+	GameRules.start_minigame.connect(start)
+	GameRules.send_dodge_value.connect(set_game_difficulty)
+	stop()
+
+func _process(delta: float) -> void:
+	if mode == Mode.End and transition_timer.is_stopped():
+		stop()
+	elif !stopped and transition_timer.is_stopped():
+		play_mini_game(delta)
 
 func stop():
 	if !stopped:
@@ -84,11 +98,6 @@ func move_target(angle : float):
 	target_angle = angle
 	target.position = Vector2.RIGHT.rotated(deg_to_rad(angle)) * circle_radius
 
-func _ready() -> void:
-	GameRules.start_minigame.connect(start)
-	GameRules.send_dodge_value.connect(set_game_difficulty)
-	stop()
-
 func play_mini_game(delta: float):
 	arrow_angle += direction * arrow_speed * delta
 	arrow_angle = fmod(arrow_angle, 360.0)
@@ -98,21 +107,17 @@ func play_mini_game(delta: float):
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		_check_hit()
-
-func _process(delta: float) -> void:
-	if mode == Mode.End and transition_timer.is_stopped():
-		stop()
-	elif !stopped and transition_timer.is_stopped():
-		play_mini_game(delta)
  
 func decrement_failures():
 	match mode:
 		Mode.Attack:
 			attacks -= 1
+			GameRules.spend_attack_token.emit()
 			if attacks <= 0:
 				transition_mode(Mode.Block)
 		Mode.Block:
 			blocks -= 1
+			GameRules.spend_defend_token.emit()
 			if blocks <= 0:
 				transition_mode(Mode.End)
 
@@ -136,7 +141,9 @@ func _check_hit() -> void:
 	if diff <= target_range:
 		arrow_speed = arrow_speed * enemy_dodge
 		increment_success()
+		success.play()
 	else:
+		miss.play()
 		decrement_failures()
 		arrow_speed = 180.0
 	move_target_random()

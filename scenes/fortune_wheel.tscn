@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bg65l1k5yoqjs"]
+[gd_scene load_steps=13 format=3 uid="uid://bg65l1k5yoqjs"]
 
 [ext_resource type="Script" uid="uid://bjfswv8npxuj6" path="res://scripts/fortune_wheel.gd" id="1_e0mqf"]
 [ext_resource type="Texture2D" uid="uid://ddf4tegacel6i" path="res://art/sprites/wheel.png" id="2_4bqi3"]
 [ext_resource type="Texture2D" uid="uid://ci7q71s20nimb" path="res://art/sprites/Shikashi's Fantasy Icons Pack v2/#1 - Transparent Icons.png" id="3_ql1ej"]
 [ext_resource type="Texture2D" uid="uid://bgrth2m6rdo7a" path="res://art/sprites/select_arrow.png" id="4_dwwif"]
+[ext_resource type="AudioStream" uid="uid://c2563o4dpm1s7" path="res://art/sfx/wheel-spin-click-slow-down-101152 (1) (mp3cut.net).mp3" id="5_dwwif"]
+[ext_resource type="AudioStream" uid="uid://m72fqv0rg42p" path="res://art/sfx/army-rank-up-2-84543.mp3" id="6_2mk4l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2mk4l"]
 atlas = ExtResource("3_ql1ej")
@@ -23,15 +25,13 @@ region = Rect2(32, 352, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwwif"]
 atlas = ExtResource("3_ql1ej")
-region = Rect2(195.613, 96, 32, 32)
+region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ktxr"]
 atlas = ExtResource("3_ql1ej")
 region = Rect2(448, 96, 32, 32)
 
 [node name="FortuneWheel" type="Node2D"]
-position = Vector2(406, 178)
-scale = Vector2(3, 3)
 script = ExtResource("1_e0mqf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -39,35 +39,35 @@ rotation = 0.806342
 texture = ExtResource("2_4bqi3")
 
 [node name="Strength" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(9, 34)
+position = Vector2(8.15291, 29.0627)
 scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_2mk4l")
 
 [node name="Blight" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(-28, 23)
+position = Vector2(-26.1793, 22.002)
 scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_026ud")
 
 [node name="Defense" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(-37, -12)
-rotation = 2.0944
+position = Vector2(-29.9092, -9.74667)
+rotation = 1.91986
 scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_k3e1o")
 
 [node name="Reflect" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(-7, -37)
-rotation = 2.96706
+position = Vector2(20.5533, -20.4696)
+rotation = 3.92699
 scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_ql1ej")
 
-[node name="Health" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(25.6685, -23.8773)
-rotation = 3.93223
+[node name="Lifesteal" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-6.98944, -29.7944)
+rotation = 3.40863
 scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_dwwif")
 
 [node name="Rewrite" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(32.6975, 7.80222)
+position = Vector2(30.8123, 7.84172)
 rotation = 5.044
 scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_8ktxr")
@@ -79,14 +79,14 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_dwwif")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.5
+wait_time = 0.6
 one_shot = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -19.6667
-offset_top = -19.3333
-offset_right = 80.3333
-offset_bottom = 80.6667
-bbcode_enabled = true
-fit_content = true
-scroll_active = false
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_dwwif")
+bus = &"SFX"
+
+[node name="ResultSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_2mk4l")
+pitch_scale = 0.8
+bus = &"SFX"

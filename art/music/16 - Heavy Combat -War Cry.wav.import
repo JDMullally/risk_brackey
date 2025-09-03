@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c1aoiarmkec34"
+path="res://.godot/imported/16 - Heavy Combat -War Cry.wav-123431a7e5f027cebadf5b1bfca98645.sample"
+
+[deps]
+
+source_file="res://art/music/16 - Heavy Combat -War Cry.wav"
+dest_files=["res://.godot/imported/16 - Heavy Combat -War Cry.wav-123431a7e5f027cebadf5b1bfca98645.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

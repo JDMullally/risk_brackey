@@ -18,6 +18,8 @@ const GREATER_GOLEM = preload("res://resources/enemy/greater_golem.tres")
 @export var enemy_stats : EnemyStats
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_state: EnemyAnimationState = $AnimationState
+@onready var hit: AudioStreamPlayer = $Hit
+@onready var block: AudioStreamPlayer = $Block
 
 var base_dodge : float = 1.5
 var turn_damage : int
@@ -30,6 +32,8 @@ var monster_ready : bool
 
 func switch_monster(turn : int):
 	var next_stats: EnemyStats = _choose_stats_for_turn(turn)
+	if !next_stats:
+		return
 	enemy_stats = next_stats.duplicate(true)
 	enemy_stats.reset()
 	GameRules.update_hp.emit()
@@ -52,7 +56,15 @@ func _ready():
 	monster_ready = true
 	GameRules.switch_monster.connect(switch_monster)
 	GameRules.check_monster_ready.connect(check_monster_ready)
+	GameRules.change_monster_affix.connect(rewrite)
+	GameRules.blight_bonus.connect(blight_damage_buff)
 	setup()
+
+func rewrite():
+	enemy_stats.rewrite_gambit()
+
+func blight_damage_buff():
+	enemy_stats.blight_gambit()
 
 func check_monster_ready():
 	if monster_ready:
@@ -75,8 +87,10 @@ func calculate_damage():
 			total_damage = enemy_stats.base_calculated_damage()
 	return total_damage
 
+func heal(value : int):
+	enemy_stats.heal(value)
+
 func heal_if_able():
-	print("hi")
 	match enemy_stats.bonus_ability:
 			EnemyStats.BonusAbilityType.Regenerate:
 				enemy_stats.heal(enemy_stats.bonus_ability_mod)
@@ -107,10 +121,11 @@ func setup_sprite():
 	nudge_above_y(animated_sprite_2d, 346, enemy_stats.floating_margin)
 
 func _process(delta: float) -> void:
-	pass
+	send_dodge_value()
 
 func enemy_dead():
 	return enemy_stats.is_dead()
+
 
 func take_damage(damage : int):
 	var total_damage_taken : int
@@ -135,8 +150,10 @@ func take_damage(damage : int):
 			animation_state.play_dying()
 		else:
 			animation_state.play_hit()
+		hit.play()
 	if total_damage_taken <= 0:
 		animation_state.play_hit_no_damage()
+		block.play()
 
 
 func get_sprite_screen_aabb(s: AnimatedSprite2D) -> Rect2:
@@ -204,6 +221,9 @@ func _choose_stats_for_turn(turn: int) -> EnemyStats:
 			return SLASHING_GOLEM
 		9:
 			return GREATER_GOLEM
+		10:
+			GameRules.game_state_win.emit()
+			return
 		_:
 			return
 

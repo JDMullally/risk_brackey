@@ -132,13 +132,13 @@ func _show_tooltip() -> void:
 			text = text + \"[color=SLATE_GRAY]Block \" + ability_mod + \"[/color]: \"
 			text = text + \"\\nThis creature is able to block up to \" + str(int(enemy.enemy_stats.bonus_ability_mod)) + \" additional damage.\"
 		EnemyStats.BonusAbilityType.Dodge:
-			text = text + \"[color=LIGHT_GREEN]\" + ability_mod + \"[/color]: \"
+			text = text + \"[color=LIGHT_GREEN]Speed\" + ability_mod + \"[/color]: \"
 			text = text + \"\\nThis creature causes subsequent target hits to be much harder.\"
 		EnemyStats.BonusAbilityType.Crush:
 			text = text + \"[color=DARK_SLATE_GRAY]Crush \" + ability_mod + \"[/color]: \"
 			text = text + \"\\nThis creature pierces up to \" + ability_mod + \" block value when it attacks.\"
 		EnemyStats.BonusAbilityType.Enrage:
-			text = text + \"  [color=RED]Enrage \" + ability_mod + \"[/color]: \"
+			text = text + \"[color=RED]Enrage \" + ability_mod + \"[/color]: \"
 			text = text + \"\\nEvery 2 damage this creature takes, it gains \" + ability_mod + \" permanent damage.\"
 		EnemyStats.BonusAbilityType.Endure:
 			text = text + \"[color=TEAL]Endure \" + ability_mod + \"[/color]: \"

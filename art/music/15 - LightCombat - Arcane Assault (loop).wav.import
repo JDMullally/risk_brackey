@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dc1vlgfgbp07l"
+path="res://.godot/imported/15 - LightCombat - Arcane Assault (loop).wav-084dcbf8f9b8c84ff5588157752a5d6e.sample"
+
+[deps]
+
+source_file="res://art/music/15 - LightCombat - Arcane Assault (loop).wav"
+dest_files=["res://.godot/imported/15 - LightCombat - Arcane Assault (loop).wav-084dcbf8f9b8c84ff5588157752a5d6e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bxtpg4ay71jnv"
+path="res://.godot/imported/17 - Heavy Combat - Charge Ahead!.wav-9c46bc76e45cf403dea937bde8b895d1.sample"
+
+[deps]
+
+source_file="res://art/music/17 - Heavy Combat - Charge Ahead!.wav"
+dest_files=["res://.godot/imported/17 - Heavy Combat - Charge Ahead!.wav-9c46bc76e45cf403dea937bde8b895d1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

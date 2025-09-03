@@ -1,0 +1,103 @@
+[gd_scene load_steps=3 format=3 uid="uid://0pdrurlpoq"]
+
+[ext_resource type="Script" uid="uid://c4plg2vjicfsj" path="res://scenes/rule_window.gd" id="1_ofmrv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ln24"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="RuleWindow" type="Panel"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_right = 291.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ln24")
+script = ExtResource("1_ofmrv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -262.5
+offset_right = -3.0
+offset_bottom = -162.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=96][center][wave]Rules[/wave][/center][/font_size]"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 102.0
+offset_right = 719.0
+offset_bottom = 445.0
+bbcode_enabled = true
+text = "[font_size=32][center]
+Hello and thank you for playing my game! 
+
+When you start the game, you'll be thrown right into Combat. If you [color=GREEN]Survive 9 Combats[/color], you complete your quest and [color=GREEN]Win the Game.[/color]
+
+At the start combat, the enemy you're facing will display how much damage they'll do on their turn.  This is indicated by a red number above an Axe.
+
+They will also may have an Abilities.  Abilities are special affixes that change how they interact with the game. The abilities are as follows: [/center]
+
+[color=SLATE_GRAY]Block[/color]: The creature prevents a certain amount of damage
+
+[color=TEAL]Endure[/color]: The creature ignores up to certain threshold of damage
+
+[color=RED]Enrage[/color]: Every two damage dealt to the creature give it some extra damage at the start of it's next turn.
+
+[color=WEB_GREEN]Regenerate[/color]: The creature restores health at the end of it's turn.
+
+[color=LIGHT_GREEN]Speed[/color]: The creature is harder to hit.
+
+[color=DARK_SLATE_GRAY]Crush[/color]: The creature ignores a certain amount of block.
+
+[center] There will always be a number attached to an Ability to show how effective it will be.
+
+After reading your enemy's damage and ability, [color=GREEN]choose how many attack and defend actions you'll take on your turn.[/color] You'll do this by selecting the corresponding arrows on the gambit menu that should appear at the beginning of combat.  
+You have a pool of 3 actions to start with, but [color=GREEN] you gain 1 action every 3 battles.[/color]
+Next, you can choose to make a [color=Yellow]Gambit[/color] or [color=Yellow]Continue[/color].  
+If you choose to  [color=Yellow]Continue[/color], you go straight to the [color=BLUE] Combat Mini-Game[/color]. 
+If you choose to [color=Yellow]Gambit[/color], the  [color=Yellow]Gambit Wheel[/color] will Spin. Spinning the [color=Yellow]Gambit Wheel[/color]  incurs some serious [color=Crimson]Risk[/color], but also may pave your path to [color=GREEN]Victory[/color].
+
+There are 6 resulting  [color=Yellow]Gambits[/color] from the [color=Yellow]Gambit Wheel[/color]: [/center]
+
+[color=ORANGE_RED][Strength][/color]: Increase the number of your attacks by 1 half your selected attack actions. This cannot be less than 1.
+
+[color=DARK_OLIVE_GREEN][Blight][/color]: Cuts all your selected actions by half and your opponent's damage potential doubles permanently.
+
+[color=CADET_BLUE][Defense][/color]: Increase the number of your defends by 1 half your selected defend actions. This cannot be less than 1.
+
+[color=PALE_GOLDENROD][Reflect][/color]: You deal your damage to your enemy and yourself.  This self damage can be blocked.
+
+[color=CRIMSON][Lifesteal][/color]: You heal for the damage you would do on your turn, regardless if the monster blocks it or not.
+
+[color=ORCHID][Rewrite][/color]: Changes an enemy's ability to a random one.
+
+[center]After the [color=YELLOW]Gambit[/color] has been resolved, combat will resolve with the player attacking first and then the monster attacking if it is still alive.  Once damage has been done to both parties, the combat restarts.
+
+Good luck, and have fun!
+
+[/center][/font_size]"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 713.0
+offset_top = 470.0
+offset_right = 853.0
+offset_bottom = 512.0
+theme_override_font_sizes/font_size = 32
+text = "Close Rule Window"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

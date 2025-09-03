@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bggu8atueb6cw"]
+
+[ext_resource type="Script" uid="uid://dxapfskp17sel" path="res://scripts/announcement_text.gd" id="1_khwc8"]
+
+[node name="AnnouncementText" type="RichTextLabel"]
+offset_right = 544.0
+offset_bottom = 254.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("1_khwc8")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

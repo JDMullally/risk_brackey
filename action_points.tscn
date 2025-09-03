@@ -1,0 +1,15 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn00oy3nnxfdy"]
+
+[ext_resource type="Script" uid="uid://cb5xt87ivgr0r" path="res://scripts/action_points.gd" id="1_qgx1g"]
+[ext_resource type="Texture2D" uid="uid://djv3gd1whnoqk" path="res://art/sprites/attack_point.png" id="2_ovn8u"]
+[ext_resource type="Texture2D" uid="uid://p2f7kkqpijwm" path="res://art/sprites/defend_point.png" id="3_flfw8"]
+[ext_resource type="Texture2D" uid="uid://ds6aus0ddw4vu" path="res://art/sprites/attack_point_spent.png" id="4_qxy46"]
+[ext_resource type="Texture2D" uid="uid://dnqoiw5v8n7fb" path="res://art/sprites/defend_point_spent.png" id="5_eq370"]
+
+[node name="ActionPoints" type="Node2D"]
+position = Vector2(103, 243)
+script = ExtResource("1_qgx1g")
+attack_sprite = ExtResource("2_ovn8u")
+defend_sprite = ExtResource("3_flfw8")
+spent_attack_sprite = ExtResource("4_qxy46")
+spent_defend_sprite = ExtResource("5_eq370")

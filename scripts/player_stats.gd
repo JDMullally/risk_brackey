@@ -9,9 +9,7 @@ var current_blocks : int = 0
 
 func heal_and_increase_health():
 	max_hp = max_hp + 1
-	print(current_health)
 	current_health = clampi(current_health + 1 + health_per_round, 0, max_hp)
-	print(current_health)
 	GameRules.update_hp.emit()
 
 func increase_num_actions():
@@ -36,3 +34,6 @@ func take_damage(damage : int, crush_value):
 	var actual_blocks = clampi((current_blocks - crush_value), 0, current_blocks)
 	var new_damage = clampi(damage - actual_blocks, 0, damage)
 	current_health = clampi(current_health - new_damage, 0, current_health)
+
+func heal(value : int):
+	current_health = clampi(current_health + value, 0, max_hp)

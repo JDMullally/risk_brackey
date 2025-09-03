@@ -14,5 +14,6 @@ enemy_sprite = ExtResource("1_uecit")
 enemy_sprite_flipped = true
 description = "This creature has devestating stone claws."
 bonus_ability = 3
-bonus_ability_mod = 4.0
+bonus_ability_mod = 8.0
+difficulty = 7
 metadata/_custom_type_script = "uid://5xy0dqnakq1m"

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://epu76w0dnoc3"
+path="res://.godot/imported/3 - Heavy Combat - Mystic Melee (loop).wav-efe99247a67610f520f126ab392e1b0b.sample"
+
+[deps]
+
+source_file="res://art/music/3 - Heavy Combat - Mystic Melee (loop).wav"
+dest_files=["res://.godot/imported/3 - Heavy Combat - Mystic Melee (loop).wav-efe99247a67610f520f126ab392e1b0b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

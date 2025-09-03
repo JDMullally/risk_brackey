@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=3 uid="uid://cb16dxrcbpuxf"]
+
+[ext_resource type="Script" uid="uid://c2hk8ffc5abx5" path="res://scenes/GameWin.gd" id="1_l1273"]
+[ext_resource type="AudioStream" uid="uid://b7dbh4udj2bjp" path="res://art/music/fantasy-medieval-epic-music-239599.mp3" id="2_7ej5r"]
+[ext_resource type="AudioStream" uid="uid://bml8wfkf3t0s0" path="res://art/sfx/light-woosh-7119 (mp3cut.net).mp3" id="3_oueg3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtd57"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1273"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Panel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mtd57")
+script = ExtResource("1_l1273")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -319.0
+offset_bottom = -219.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=96][center]You completed your quest![/center][/font_size]"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -131.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=48][center]Well Done Champion[/center][/font_size]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 184.0
+offset_top = -21.5
+offset_right = -215.0
+offset_bottom = 185.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="Retry" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Go Again"
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Main Menu
+"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_7ej5r")
+autoplay = true
+bus = &"Music"
+
+[node name="MouseOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_oueg3")
+pitch_scale = 0.85
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l1273")
+
+[connection signal="pressed" from="VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

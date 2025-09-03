@@ -16,4 +16,5 @@ description = "A powerful shield protects this creature.  It must be destroyed i
 "
 bonus_ability = 5
 bonus_ability_mod = 14.0
+difficulty = 5
 metadata/_custom_type_script = "uid://5xy0dqnakq1m"

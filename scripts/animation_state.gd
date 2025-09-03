@@ -58,6 +58,9 @@ func play_hit() -> void:
 		state = State.HIT
 		_play(hit)
 
+func is_current_animation_dead() -> bool:
+	return state == State.DEAD
+
 func play_dying() -> void:
 	if state == State.DEAD or state == State.DYING:
 		return

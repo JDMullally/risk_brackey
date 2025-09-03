@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bekikn7a81qc2"]
+[gd_scene load_steps=7 format=3 uid="uid://bekikn7a81qc2"]
 
 [ext_resource type="SpriteFrames" uid="uid://chrlaxjm0uq0" path="res://resources/sprite_frames/GolemSprite.tres" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://qn7a05jj1a03" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Resource" uid="uid://ch5pwfqylv50w" path="res://resources/enemy/slashing_golem.tres" id="2_4ra3w"]
 [ext_resource type="Script" uid="uid://c4mnw6p0rcqtv" path="res://scripts/enemy_animation_state.gd" id="4_5uy6h"]
+[ext_resource type="AudioStream" uid="uid://bnllc8pan1ac4" path="res://art/sfx/hit-flesh-02-266309.mp3" id="5_c4w8v"]
+[ext_resource type="AudioStream" uid="uid://ca2fpdocl1vb8" path="res://art/sfx/anvil-hit-2-14845 (mp3cut.net).mp3" id="6_xwavj"]
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_md0e3")
@@ -15,3 +17,11 @@ animation = &"idle"
 
 [node name="AnimationState" type="Node" parent="."]
 script = ExtResource("4_5uy6h")
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_c4w8v")
+bus = &"SFX"
+
+[node name="Block" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_xwavj")
+pitch_scale = 0.9

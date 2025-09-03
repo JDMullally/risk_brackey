@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://efkk52hikge4"]
+[gd_scene load_steps=25 format=3 uid="uid://efkk52hikge4"]
 
 [ext_resource type="Script" uid="uid://d0e7ol55u2oha" path="res://scripts/game_scene.gd" id="1_onqr8"]
 [ext_resource type="Texture2D" uid="uid://blcno00q2ukgy" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-bg.png" id="2_b5spy"]
@@ -18,6 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://b3wr2ivets0ye" path="res://scenes/enemy_tooltip.tscn" id="16_mwyo0"]
 [ext_resource type="PackedScene" uid="uid://dsdl2xyfsgmqk" path="res://scenes/gambit.tscn" id="17_mwyo0"]
 [ext_resource type="PackedScene" uid="uid://bisfs376008fm" path="res://scenes/info_panel.tscn" id="18_s76x2"]
+[ext_resource type="PackedScene" uid="uid://bn00oy3nnxfdy" path="res://action_points.tscn" id="19_6aqbo"]
+[ext_resource type="PackedScene" uid="uid://bg65l1k5yoqjs" path="res://scenes/fortune_wheel.tscn" id="19_77hjl"]
+[ext_resource type="PackedScene" uid="uid://olvtaq7a8082" path="res://scenes/decide_gambit_panel.tscn" id="20_85lt4"]
+[ext_resource type="PackedScene" uid="uid://bggu8atueb6cw" path="res://scenes/announcement_text.tscn" id="21_ro0ie"]
+[ext_resource type="Script" uid="uid://bfsj1nvdbdobc" path="res://scripts/MusicPlayer.gd" id="22_103ce"]
+[ext_resource type="PackedScene" uid="uid://dtk6wosob8b5" path="res://scenes/menu.tscn" id="23_pb36m"]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_onqr8")
@@ -49,7 +55,7 @@ texture = ExtResource("3_utbpp")
 
 [node name="Player" parent="." instance=ExtResource("2_bw6k5")]
 unique_name_in_owner = true
-position = Vector2(235, 217)
+position = Vector2(234, 224)
 scale = Vector2(2, 2)
 animation = &"dead"
 stats = ExtResource("7_mw25s")
@@ -63,6 +69,7 @@ custom_minimum_size = Vector2(1152, 0)
 offset_top = 303.0
 offset_right = 1152.0
 offset_bottom = 649.0
+size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("9_5ay1a")
 
 [node name="MonsterHealth" parent="Bottom Screen" node_paths=PackedStringArray("character") instance=ExtResource("9_tcjrq")]
@@ -83,10 +90,10 @@ position = Vector2(794, -208)
 
 [node name="InfoPanel" parent="Bottom Screen" node_paths=PackedStringArray("enemy", "tooltip") instance=ExtResource("18_s76x2")]
 layout_mode = 0
-offset_left = 748.0
-offset_top = 7.0
-offset_right = 788.0
-offset_bottom = 47.0
+offset_left = 794.0
+offset_top = -288.0
+offset_right = 834.0
+offset_bottom = -248.0
 enemy = NodePath("../../Enemy")
 tooltip = NodePath("../EnemyTooltip")
 
@@ -98,17 +105,47 @@ offset_right = 1017.0
 offset_bottom = 107.0
 
 [node name="Gambit" parent="Bottom Screen" instance=ExtResource("17_mwyo0")]
-visible = false
 layout_mode = 0
-offset_left = 271.0
-offset_top = -245.0
-offset_right = 571.0
-offset_bottom = -5.0
+offset_left = 268.0
+offset_top = -160.0
+offset_right = 568.0
+offset_bottom = 80.0
 scale = Vector2(2, 2)
+
+[node name="ActionPoints" parent="Bottom Screen" instance=ExtResource("19_6aqbo")]
+position = Vector2(32, 120)
+
+[node name="DecideGambitPanel" parent="Bottom Screen" instance=ExtResource("20_85lt4")]
+layout_mode = 0
+offset_left = 268.0
+offset_top = -112.0
+offset_right = 868.0
+offset_bottom = 188.0
 
 [node name="TransitionTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FortuneWheel" parent="CanvasLayer" instance=ExtResource("19_77hjl")]
+position = Vector2(578, 324)
+scale = Vector2(4, 4)
+
+[node name="AnnouncementText" parent="CanvasLayer" instance=ExtResource("21_ro0ie")]
+offset_left = 310.0
+offset_top = 181.0
+offset_right = 854.0
+offset_bottom = 435.0
+
+[node name="Menu" parent="CanvasLayer" instance=ExtResource("23_pb36m")]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("22_103ce")
+
+[node name="PlayerA" type="AudioStreamPlayer" parent="Node"]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="PlayerB" type="AudioStreamPlayer" parent="Node"]
+unique_name_in_owner = true

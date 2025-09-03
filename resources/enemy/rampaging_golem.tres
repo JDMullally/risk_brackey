@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_f5f1a")
-max_health = 15
+max_health = 24
 size_multiplier = 6.0
 floating_margin = 40
 max_damage = 4
@@ -14,5 +14,6 @@ enemy_sprite = ExtResource("1_cq720")
 enemy_sprite_flipped = true
 description = "This Golem has anger issues."
 bonus_ability = 4
-bonus_ability_mod = 2.0
+bonus_ability_mod = 4.0
+difficulty = 8
 metadata/_custom_type_script = "uid://5xy0dqnakq1m"

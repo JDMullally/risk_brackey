@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bpar8t12pgke4"
+path="res://.godot/imported/13 - Heavy Combat - Warrior of the West.wav-49a86d405ff8f690662f84c88bd18eb6.sample"
+
+[deps]
+
+source_file="res://art/music/13 - Heavy Combat - Warrior of the West.wav"
+dest_files=["res://.godot/imported/13 - Heavy Combat - Warrior of the West.wav-49a86d405ff8f690662f84c88bd18eb6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

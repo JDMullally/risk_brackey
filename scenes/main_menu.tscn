@@ -1,0 +1,116 @@
+[gd_scene load_steps=7 format=3 uid="uid://dptfi1or6lijw"]
+
+[ext_resource type="StyleBox" uid="uid://3hr424rtvmp8" path="res://resources/style_box.tres" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://cic5msanf1j4y" path="res://scripts/main_menu.gd" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://odewqecr1jw3" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-close-trees.png" id="3_bqqt6"]
+[ext_resource type="AudioStream" uid="uid://bml8wfkf3t0s0" path="res://art/sfx/light-woosh-7119 (mp3cut.net).mp3" id="4_8ln24"]
+[ext_resource type="AudioStream" uid="uid://b7dbh4udj2bjp" path="res://art/music/fantasy-medieval-epic-music-239599.mp3" id="4_wu84c"]
+[ext_resource type="PackedScene" uid="uid://0pdrurlpoq" path="res://scenes/rule_window.tscn" id="6_rtw2f"]
+
+[node name="Panel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_l6cm7")
+script = ExtResource("2_ekxnf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bqqt6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 1156.0
+offset_bottom = 122.0
+bbcode_enabled = true
+text = "[font_size=96][center][wave]Knight's Gambit[/wave][/center][/font_size]"
+scroll_active = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 148.0
+offset_right = 966.0
+offset_bottom = 541.0
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="StartGame" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(20, 80)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/StartGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font_size=80][center]Start Game[/center][/font_size]"
+scroll_active = false
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font_size=80][center]Settings[/center][/font_size]"
+scroll_active = false
+
+[node name="HowToPlay" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HowToPlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font_size=80][center]How to Play[/center][/font_size]"
+scroll_active = false
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+
+[node name="MouseOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8ln24")
+pitch_scale = 0.85
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wu84c")
+autoplay = true
+
+[node name="RuleWindow" parent="." instance=ExtResource("6_rtw2f")]
+layout_mode = 1
+offset_left = -425.0
+offset_top = 66.0
+offset_right = 442.0
+offset_bottom = -55.0
+
+[connection signal="mouse_entered" from="VBoxContainer/StartGame" to="." method="play_mouse_over_sound"]
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_start_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Settings" to="." method="play_mouse_over_sound"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/HowToPlay" to="." method="play_mouse_over_sound"]
+[connection signal="pressed" from="VBoxContainer/HowToPlay" to="." method="_how_to_play_pressed"]

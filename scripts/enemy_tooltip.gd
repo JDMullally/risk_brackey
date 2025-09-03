@@ -35,6 +35,7 @@ func _ready() -> void:
 
 func set_text(bbcode: String) -> void:
 	text_node.clear()
+	bbcode = "[font_size=24]" + bbcode + "[/font_size]"
 	text_node.append_text(bbcode)
 	await get_tree().process_frame
 	_size_to_content()

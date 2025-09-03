@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bk0hsnnp460t7"
+path="res://.godot/imported/9 - Heavy Combat - Thunderous Roar.wav-44b907746982c4082ac272f4f13bd72a.sample"
+
+[deps]
+
+source_file="res://art/music/9 - Heavy Combat - Thunderous Roar.wav"
+dest_files=["res://.godot/imported/9 - Heavy Combat - Thunderous Roar.wav-44b907746982c4082ac272f4f13bd72a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

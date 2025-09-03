@@ -11,13 +11,21 @@ config_version=5
 [application]
 
 config/name="risk_brackey"
-run/main_scene="uid://efkk52hikge4"
+run/main_scene="uid://dptfi1or6lijw"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameRules="*res://scripts/game_rules.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom_font="uid://dfikm4oku7awn"
 
 [rendering]
 

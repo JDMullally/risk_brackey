@@ -5,14 +5,15 @@
 
 [resource]
 script = ExtResource("1_vb7om")
-max_health = 25
+max_health = 20
 size_multiplier = 4.0
 floating_margin = 90
-max_damage = 7
+max_damage = 1
 min_damage = 9
 enemy_sprite = ExtResource("1_cqqe6")
 enemy_sprite_flipped = false
 description = ""
 bonus_ability = 4
-bonus_ability_mod = 3.0
+bonus_ability_mod = 2.0
+difficulty = 6
 metadata/_custom_type_script = "uid://5xy0dqnakq1m"

@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://brt38ckkcew7b"]
+
+[ext_resource type="Script" uid="uid://waott0744dmi" path="res://scripts/game_over.gd" id="1_xeevv"]
+[ext_resource type="AudioStream" uid="uid://b7dbh4udj2bjp" path="res://art/music/fantasy-medieval-epic-music-239599.mp3" id="2_wqhvx"]
+[ext_resource type="AudioStream" uid="uid://bml8wfkf3t0s0" path="res://art/sfx/light-woosh-7119 (mp3cut.net).mp3" id="3_tbwuq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xeevv"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbwuq"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="GameOver" type="Panel"]
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_xeevv")
+script = ExtResource("1_xeevv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -323.5
+offset_bottom = -223.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=96][color=RED][center][wave]You Were Defeated[/wave][/center][/color][/font_size]"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -140.5
+offset_bottom = -40.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=48
+][color=White][center]But your quest remains unfulfilled...[/center][/color][/font_size]"
+scroll_active = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 184.0
+offset_top = -21.5
+offset_right = -215.0
+offset_bottom = 185.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="Retry" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Retry"
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Main Menu
+"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wqhvx")
+pitch_scale = 0.8
+autoplay = true
+bus = &"Music"
+
+[node name="MouseOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tbwuq")
+pitch_scale = 0.85
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tbwuq")
+
+[connection signal="mouse_entered" from="VBoxContainer/Retry" to="." method="play_mouse_over_sound"]
+[connection signal="pressed" from="VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/MainMenu" to="." method="play_mouse_over_sound"]
+[connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

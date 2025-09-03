@@ -15,4 +15,5 @@ enemy_sprite_flipped = false
 description = "Basic Slime."
 bonus_ability = 0
 bonus_ability_mod = 0.0
+difficulty = 1
 metadata/_custom_type_script = "uid://5xy0dqnakq1m"

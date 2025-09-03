@@ -1,0 +1,142 @@
+[gd_scene load_steps=23 format=3 uid="uid://efkk52hikge4"]
+
+[ext_resource type="Script" uid="uid://d0e7ol55u2oha" path="res://scripts/game_scene.gd" id="1_onqr8"]
+[ext_resource type="Texture2D" uid="uid://blcno00q2ukgy" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-bg.png" id="2_b5spy"]
+[ext_resource type="PackedScene" uid="uid://ufnu4qtiq77e" path="res://scenes/player.tscn" id="2_bw6k5"]
+[ext_resource type="PackedScene" uid="uid://dhaue7wuoyjus" path="res://scenes/mini_game.tscn" id="2_ycayy"]
+[ext_resource type="Texture2D" uid="uid://odewqecr1jw3" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-close-trees.png" id="3_utbpp"]
+[ext_resource type="PackedScene" uid="uid://bekikn7a81qc2" path="res://scenes/enemy.tscn" id="3_ycayy"]
+[ext_resource type="Texture2D" uid="uid://rh765j1ax0jm" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-far-trees.png" id="4_mw25s"]
+[ext_resource type="Texture2D" uid="uid://1dguiiyegqk6" path="res://art/sprites/parallax_demon_woods_pack/layers/parallax-demon-woods-mid-trees.png" id="5_tcjrq"]
+[ext_resource type="Resource" uid="uid://31ix6k1ajpcs" path="res://resources/player/player_stats.tres" id="7_mw25s"]
+[ext_resource type="StyleBox" uid="uid://3hr424rtvmp8" path="res://resources/style_box.tres" id="9_5ay1a"]
+[ext_resource type="Resource" uid="uid://coyqlhwoowhba" path="res://resources/enemy/slime.tres" id="9_s76x2"]
+[ext_resource type="PackedScene" uid="uid://disjdvxsc4y21" path="res://scenes/monster_health.tscn" id="9_tcjrq"]
+[ext_resource type="PackedScene" uid="uid://b4l6n01dkdb4c" path="res://scenes/player_health.tscn" id="9_utbpp"]
+[ext_resource type="Script" uid="uid://tfss0xcekjyv" path="res://scripts/player_healthbar.gd" id="12_rvs2r"]
+[ext_resource type="PackedScene" uid="uid://ucax1fe14hbd" path="res://scenes/monster_damage_intent.tscn" id="13_tqxxy"]
+[ext_resource type="PackedScene" uid="uid://b3wr2ivets0ye" path="res://scenes/enemy_tooltip.tscn" id="16_mwyo0"]
+[ext_resource type="PackedScene" uid="uid://dsdl2xyfsgmqk" path="res://scenes/gambit.tscn" id="17_mwyo0"]
+[ext_resource type="PackedScene" uid="uid://bisfs376008fm" path="res://scenes/info_panel.tscn" id="18_s76x2"]
+[ext_resource type="PackedScene" uid="uid://bn00oy3nnxfdy" path="res://action_points.tscn" id="19_6aqbo"]
+[ext_resource type="PackedScene" uid="uid://bg65l1k5yoqjs" path="res://scenes/fortune_wheel.tscn" id="19_77hjl"]
+[ext_resource type="PackedScene" uid="uid://bggu8atueb6cw" path="res://scenes/announcement_text.tscn" id="21_ro0ie"]
+[ext_resource type="Script" uid="uid://bfsj1nvdbdobc" path="res://scripts/MusicPlayer.gd" id="22_103ce"]
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_onqr8")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_offset = Vector2(-386, -30)
+repeat_size = Vector2(400, 0)
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_b5spy")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_mw25s")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_tcjrq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(776, 131)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_utbpp")
+
+[node name="Player" parent="." instance=ExtResource("2_bw6k5")]
+unique_name_in_owner = true
+position = Vector2(234, 224)
+scale = Vector2(2, 2)
+animation = &"dead"
+stats = ExtResource("7_mw25s")
+
+[node name="Enemy" parent="." instance=ExtResource("3_ycayy")]
+position = Vector2(1007, 270)
+enemy_stats = ExtResource("9_s76x2")
+
+[node name="Bottom Screen" type="Panel" parent="."]
+custom_minimum_size = Vector2(1152, 0)
+offset_top = 303.0
+offset_right = 1152.0
+offset_bottom = 649.0
+theme_override_styles/panel = ExtResource("9_5ay1a")
+
+[node name="MonsterHealth" parent="Bottom Screen" node_paths=PackedStringArray("character") instance=ExtResource("9_tcjrq")]
+position = Vector2(900, 30)
+character = NodePath("../../Enemy")
+
+[node name="MiniGame" parent="Bottom Screen" instance=ExtResource("2_ycayy")]
+position = Vector2(576, 151)
+scale = Vector2(2, 2)
+
+[node name="PlayerHealth" parent="Bottom Screen" node_paths=PackedStringArray("character") instance=ExtResource("9_utbpp")]
+position = Vector2(32, 30)
+script = ExtResource("12_rvs2r")
+character = NodePath("../../Player")
+
+[node name="MonsterDamageIntent" parent="Bottom Screen" instance=ExtResource("13_tqxxy")]
+position = Vector2(794, -208)
+
+[node name="InfoPanel" parent="Bottom Screen" node_paths=PackedStringArray("enemy", "tooltip") instance=ExtResource("18_s76x2")]
+layout_mode = 0
+offset_left = 794.0
+offset_top = -288.0
+offset_right = 834.0
+offset_bottom = -248.0
+enemy = NodePath("../../Enemy")
+tooltip = NodePath("../EnemyTooltip")
+
+[node name="EnemyTooltip" parent="Bottom Screen" instance=ExtResource("16_mwyo0")]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 41.0
+offset_right = 1017.0
+offset_bottom = 107.0
+
+[node name="Gambit" parent="Bottom Screen" instance=ExtResource("17_mwyo0")]
+layout_mode = 0
+offset_left = 268.0
+offset_top = -160.0
+offset_right = 568.0
+offset_bottom = 80.0
+scale = Vector2(2, 2)
+
+[node name="ActionPoints" parent="Bottom Screen" instance=ExtResource("19_6aqbo")]
+position = Vector2(32, 120)
+
+[node name="TransitionTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FortuneWheel" parent="CanvasLayer" instance=ExtResource("19_77hjl")]
+position = Vector2(578, 324)
+scale = Vector2(4, 4)
+
+[node name="AnnouncementText" parent="CanvasLayer" instance=ExtResource("21_ro0ie")]
+offset_left = 310.0
+offset_top = 181.0
+offset_right = 854.0
+offset_bottom = 435.0
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("22_103ce")
+
+[node name="PlayerA" type="AudioStreamPlayer" parent="Node"]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="PlayerB" type="AudioStreamPlayer" parent="Node"]
+unique_name_in_owner = true

@@ -1,16 +1,11 @@
 extends Node2D
 class_name GameManager
 
-#                         ROUND DESCRIPTION                                    #
- #- Monster shows it's damage Intent that turn
- #- Gambit Window appears where the Player can select how many successes/failures
-   #- Gambit Window gives a boon and bane (example 2 addition attack attempts but the boss gains Enrage 2)
- #- Player Plays Mini-Game
- #- Mini-Game ends and the values are collected.
- #- Damage is dealt to either enemy and player.
- #- Turn restarts
-# ##############################################################################
+const GAME_WIN = "res://scenes/game_win.tscn"
+const GAME_OVER = "res://scenes/game_over.tscn"
 
+enum MacroGameState {Transition, PlayMiniGame, GameOver, Win}
+enum MiniGameState {Setup, EnemyIntent, DoGambit, Wait, Game, PlayerTurn, MonsterTurn}
 
 @onready var enemy: Enemy = $Enemy
 @onready var player: Player = %Player
@@ -19,21 +14,19 @@ class_name GameManager
 @onready var monster_health: Node2D = $"Bottom Screen/MonsterHealth"
 @onready var mini_game: MiniGame = $"Bottom Screen/MiniGame"
 @onready var transition_timer: Timer = $TransitionTimer
-@onready var camera_2d: Camera2D = $Camera2D
 @onready var gambit_window: Gambit = $"Bottom Screen/Gambit"
 
-var macro_game_state : MacroGameState = MacroGameState.Transition
-var mini_game_state : MiniGameState = MiniGameState.Setup
-var monster_damage : int
-var encounter_number : int = 1
-var current_successful_attacks : int = 0
-var current_successful_blocks : int = 0
+@onready var macro_game_state : MacroGameState = MacroGameState.Transition
+@onready var mini_game_state : MiniGameState = MiniGameState.Setup
+@onready var encounter_number : int = 1
+@onready var monster_damage : int
+@onready var current_successful_attacks : int = 0
+@onready var current_successful_blocks : int = 0
+@onready var current_gambit : GameRules.GambitType = GameRules.GambitType.None
 
-enum MacroGameState {Transition, PlayMiniGame, GameOver, Win}
-
-enum MiniGameState {Setup, EnemyIntent, DoGambit, Wait, Game, PlayerTurn, MonsterTurn}
 
 func _ready() -> void:
+	
 	encounter_number = 1
 	macro_game_state = MacroGameState.PlayMiniGame
 	GameRules.player_attack_over.connect(func change_monster_turn(): change_mini_game_state(MiniGameState.MonsterTurn))
@@ -41,6 +34,7 @@ func _ready() -> void:
 	GameRules.gambit_finished.connect(start_game)
 	GameRules.monster_ready.connect(monster_ready)
 	GameRules.mini_game_finished.connect(mini_game_done)
+	GameRules.game_state_win.connect(func(): change_macro_game_state(MacroGameState.Win))
 	transition_timer.wait_time = 0.4
 	transition_timer.one_shot = true
 
@@ -49,9 +43,10 @@ func _process(delta: float) -> void:
 		MacroGameState.PlayMiniGame:
 			run_mini_game()
 		MacroGameState.GameOver:
-			get_tree().quit()
+			if player.ready_for_game_over_screen():
+				get_tree().change_scene_to_file(GAME_OVER)
 		MacroGameState.Win:
-			get_tree().quit()
+			get_tree().change_scene_to_file(GAME_WIN)
 			
 	# print(MiniGameState.keys()[mini_game_state])
 
@@ -90,9 +85,24 @@ func gambit():
 	GameRules.start_gambit.emit(player.stats.num_actions)
 	change_mini_game_state(MiniGameState.Wait)
 
-func start_game(attack, block):
-	GameRules.start_minigame.emit(block, attack)
+
+func start_game(attack, block, gambit):
+	current_gambit = gambit
+	match current_gambit:
+		GameRules.GambitType.Defense:
+			var bonus_defends = 2
+			GameRules.start_minigame.emit(block + bonus_defends, attack)
+		GameRules.GambitType.Strength:
+			var bonus_attacks = 2
+			GameRules.start_minigame.emit(block, attack + bonus_attacks)
+		GameRules.GambitType.Blight:
+			GameRules.start_minigame.emit(block, attack)
+		GameRules.GambitType.Rewrite:
+			GameRules.start_minigame.emit(block, attack)
+		_:
+			GameRules.start_minigame.emit(block, attack)
 	change_mini_game_state(MiniGameState.Wait)
+	
 
 func mini_game_done(sucessful_attacks, sucessful_blocks):
 	current_successful_attacks = sucessful_attacks
@@ -101,9 +111,21 @@ func mini_game_done(sucessful_attacks, sucessful_blocks):
 
 func player_turn(successful_attacks : int, successful_blocks : int):
 	player.add_blocks(successful_blocks)
-	player.deal_damage(successful_attacks)
+	match current_gambit:
+		GameRules.GambitType.Reflect:
+			player.deal_damage(successful_attacks)
+			player.take_damage(successful_attacks, 0)
+			if player.is_dead():
+				change_macro_game_state(MacroGameState.GameOver)
+			change_mini_game_state(MiniGameState.MonsterTurn)
+		GameRules.GambitType.Lifesteal:
+			player.deal_damage(successful_attacks)
+			player.heal(successful_attacks)
+			change_mini_game_state(MiniGameState.Wait)
+		_:
+			player.deal_damage(successful_attacks)
+			change_mini_game_state(MiniGameState.Wait)
 	GameRules.update_hp.emit()
-	change_mini_game_state(MiniGameState.Wait)
 
 func monster_turn():
 	if enemy.enemy_dead():

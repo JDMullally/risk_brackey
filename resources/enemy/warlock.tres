@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_tdmd7")
-max_health = 15
+max_health = 2
 size_multiplier = 4.0
 floating_margin = 40
 max_damage = 15

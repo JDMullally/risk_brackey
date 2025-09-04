@@ -33,9 +33,14 @@ func _ready() -> void:
 
 func select_actions(given_points : int, gambit_type : GameRules.GambitType):
 	current_gambit = gambit_type
-	max_points = given_points
-	points = max_points
 	set_gambit_info(gambit_type)
+	match current_gambit:
+		GameRules.GambitType.Blight:
+			max_points = clampi(given_points - 1, 0, given_points)
+			points = max_points
+		_:
+			max_points = given_points
+			points = max_points
 	damage = 0
 	block = 0
 	modulate.a = .8
@@ -124,9 +129,18 @@ func _click_tween(node: Control) -> void:
 	tween.tween_property(node, "scale", Vector2(1.0, 1.0), 0.1)
 
 func _update_labels() -> void:
-	damage_label.text = "[center][font_size=30]" + str(damage) + "[/font_size][/center]"
-	block_label.text = "[center][font_size=30]" + str(block) + "[/font_size][/center]"
-	point_label.text = "[center][font_size=30]" + str(points) + "[/font_size][/center]"
+	damage_label.clear()
+	block_label.clear()
+	point_label.clear()
+	
+	damage_label.append_text("[center][font_size=30]" + str(damage) + "[/font_size][/center]")
+	block_label.append_text("[center][font_size=30]" + str(block) + "[/font_size][/center]")
+	
+	match current_gambit:
+		GameRules.GambitType.Blight:
+			point_label.append_text("[pulse freq=1.0 color=#ffffff40 ease=-2.0][color=DARK_OLIVE_GREEN][center][font_size=30]" + str(points) + "[/font_size][/center][/color][/pulse]")
+		_:
+			point_label.append_text("[center][font_size=30]" + str(points) + "[/font_size][/center]")
 	
 	continue_arrow.visible = (points == 0)
 	undo.visible = (points < max_points)

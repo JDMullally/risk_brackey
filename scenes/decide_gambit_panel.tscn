@@ -13,6 +13,7 @@ script = ExtResource("2_l4qav")
 
 [node name="GambitTitle" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(600, 100)
+layout_mode = 0
 offset_right = 600.0
 offset_bottom = 100.0
 bbcode_enabled = true
@@ -20,6 +21,7 @@ text = "[center][font_size=64][wave]Would you like to spin the Gambit Wheel?[/wa
 scroll_active = false
 
 [node name="GambitArrow" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 180.0
 offset_right = 112.0
@@ -39,6 +41,7 @@ text = "[center][font_size=36][wave]Oh Yeah[/wave][/font_size][/center]"
 scroll_active = false
 
 [node name="ContinueArrow" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 488.0
 offset_top = 180.0
 offset_right = 520.0

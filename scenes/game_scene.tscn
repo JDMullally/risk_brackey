@@ -146,6 +146,3 @@ script = ExtResource("22_103ce")
 [node name="PlayerA" type="AudioStreamPlayer" parent="Node"]
 unique_name_in_owner = true
 bus = &"Music"
-
-[node name="PlayerB" type="AudioStreamPlayer" parent="Node"]
-unique_name_in_owner = true
